@@ -39,14 +39,14 @@ abstract class AbstractFile
      * @ORM\GeneratedValue
      * @ORM\Id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var string|null
@@ -55,21 +55,21 @@ abstract class AbstractFile
      *
      * @Assert\NotBlank(groups={"AdminUpdateProperty"})
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string|null
      *
      * @ORM\Column
      */
-    private $extension;
+    protected $extension;
 
     /**
      * @var string|null
      *
      * @ORM\Column
      */
-    private $filename;
+    protected $filename;
 
     /**
      * @var int|null
@@ -78,21 +78,21 @@ abstract class AbstractFile
      *
      * @Gedmo\SortablePosition
      */
-    private $position;
+    protected $position;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var \Symfony\Component\HttpFoundation\File\File|null
      *
      * @Vich\UploadableField(mapping="darvin_file", fileNameProperty="filename")
      */
-    private $file;
+    protected $file;
 
     /**
      * File constructor.
