@@ -249,6 +249,18 @@ abstract class AbstractFile
     }
 
     /**
+     * @param \DateTime $updatedAt updatedAt
+     *
+     * @return AbstractFile
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): AbstractFile
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
      * @return \Symfony\Component\HttpFoundation\File\File|null
      */
     public function getFile(): ?File
