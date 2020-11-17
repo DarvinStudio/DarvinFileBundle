@@ -1,0 +1,15 @@
+parameters:
+    darvin_file.namer.directory.class: Darvin\FileBundle\Namer\DirectoryNamer
+
+    darvin_file.namer.file.class: Darvin\FileBundle\Namer\FileNamer
+
+services:
+    darvin_file.namer.directory:
+        class:  '%darvin_file.namer.directory.class%'
+        public: true
+
+    darvin_file.namer.file:
+        class:  '%darvin_file.namer.file.class%'
+        public: true
+        arguments:
+            - '@darvin_utils.transliteratable.transliterator'

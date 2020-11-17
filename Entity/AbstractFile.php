@@ -117,6 +117,14 @@ abstract class AbstractFile
     abstract public static function getUploadDir(): string;
 
     /**
+     * @return string
+     */
+    public static function getBaseUploadDir(): string
+    {
+        return 'files';
+    }
+
+    /**
      * @param \Symfony\Component\HttpFoundation\File\File|null $file file
      *
      * @return AbstractFile
