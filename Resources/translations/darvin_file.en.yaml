@@ -1,0 +1,6 @@
+archive:
+    action:
+        build:
+            submit:  Archive Files
+            success: Files archived
+

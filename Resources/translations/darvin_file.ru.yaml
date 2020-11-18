@@ -1,0 +1,6 @@
+archive:
+    action:
+        build:
+            submit:  Архивировать файлы
+            success: Файлы архивированы
+
