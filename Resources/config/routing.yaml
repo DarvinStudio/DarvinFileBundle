@@ -2,3 +2,6 @@ darvin_file_import_archive:
     resource: '@DarvinFileBundle/Resources/config/routing/archive.yaml'
     prefix:   /archive
 
+darvin_file_import_file:
+    resource: '@DarvinFileBundle/Resources/config/routing/file.yaml'
+    prefix:   /file
