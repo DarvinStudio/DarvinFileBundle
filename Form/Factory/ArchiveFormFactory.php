@@ -11,6 +11,7 @@
 namespace Darvin\FileBundle\Form\Factory;
 
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -54,9 +55,12 @@ class ArchiveFormFactory implements ArchiveFormFactoryInterface
      */
     public function createBuildForm(): FormInterface
     {
-        return $this->genericFormFactory->createNamed('darvin_file_archive_build', FormType::class, null, [
+        $builder = $this->genericFormFactory->createNamedBuilder('darvin_file_archive_build', FormType::class, null, [
             'action'          => $this->router->generate('darvin_file_archive_build'),
             'csrf_protection' => false,
         ]);
+        $builder->add('_ignore_me', HiddenType::class);
+
+        return $builder->getForm();
     }
 }
