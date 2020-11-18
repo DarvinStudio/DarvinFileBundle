@@ -105,7 +105,7 @@ class BuildController
         $filename = $this->archiver->archive();
 
         $message = $this->translator->trans('archive.action.build.success', [], 'darvin_file');
-        $url = $this->router->generate('darvin_file_archive_download', [
+        $url     = $this->router->generate('darvin_file_archive_download', [
             'filename' => $filename,
         ]);
 

@@ -6,5 +6,5 @@ darvin_file_archive_build:
 darvin_file_archive_download:
     path:         /download/{filename}
     defaults:     { _controller: darvin_file.archive.controller.download }
-    requirements: { filename: '\w+%darvin_file.archive.filename_suffix%_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}.zip' }
+    requirements: { filename: '\w+files_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}.zip' }
     methods:      [ get ]

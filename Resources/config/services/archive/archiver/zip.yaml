@@ -8,6 +8,5 @@ services:
         arguments:
             - '@filesystem'
             - '@request_stack'
-            - '%darvin_file.archive.filename_suffix%'
             - '%darvin_file.archiver.zip.tmp_dir%'
             - '%kernel.project_dir%/public/%darvin_file.upload_path%'

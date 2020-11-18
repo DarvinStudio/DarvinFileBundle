@@ -27,10 +27,7 @@ class Configuration implements ConfigurationInterface
         $builder->getRootNode()
             ->children()
                 ->scalarNode('tmp_dir')->defaultValue('%kernel.project_dir%/var/tmp/darvin/file')->cannotBeEmpty()->end()
-                ->scalarNode('upload_path')->isRequired()->cannotBeEmpty()->end()
-                ->arrayNode('archive')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('filename_suffix')->defaultValue('files')->cannotBeEmpty();
+                ->scalarNode('upload_path')->isRequired()->cannotBeEmpty();
 
         return $builder;
     }

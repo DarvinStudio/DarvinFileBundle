@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class ZipArchiver implements ArchiverInterface
 {
+    private const FILENAME_SUFFIX = 'files';
+
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */
@@ -33,11 +35,6 @@ class ZipArchiver implements ArchiverInterface
     /**
      * @var string
      */
-    private $filenameSuffix;
-
-    /**
-     * @var string
-     */
     private $tmpDir;
 
     /**
@@ -46,22 +43,19 @@ class ZipArchiver implements ArchiverInterface
     private $uploadDir;
 
     /**
-     * @param \Symfony\Component\Filesystem\Filesystem       $filesystem     Filesystem
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack   Request stack
-     * @param string                                         $filenameSuffix Filename suffix
-     * @param string                                         $tmpDir         Temporary file directory
-     * @param string                                         $uploadDir      Upload directory
+     * @param \Symfony\Component\Filesystem\Filesystem       $filesystem   Filesystem
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack Request stack
+     * @param string                                         $tmpDir       Temporary file directory
+     * @param string                                         $uploadDir    Upload directory
      */
     public function __construct(
         Filesystem $filesystem,
         RequestStack $requestStack,
-        string $filenameSuffix,
         string $tmpDir,
         string $uploadDir
     ) {
         $this->filesystem = $filesystem;
         $this->requestStack = $requestStack;
-        $this->filenameSuffix = $filenameSuffix;
         $this->tmpDir = $tmpDir;
         $this->uploadDir = $uploadDir;
     }
@@ -156,7 +150,7 @@ class ZipArchiver implements ArchiverInterface
     private function buildFilename(): string
     {
         $parts = array_merge(preg_split('/[^0-9a-z]+/i', $this->getHost()), [
-            $this->filenameSuffix,
+            self::FILENAME_SUFFIX,
             (new \DateTime())->format('Y-m-d_H-i'),
         ]);
 
