@@ -1,8 +1,15 @@
 parameters:
+    darvin_file.event_listener.copy_cloned_file.class: Darvin\FileBundle\EventListener\CopyClonedFileSubscriber
+
     darvin_file.event_listener.rename.class:   Darvin\FileBundle\EventListener\RenameSubscriber
     darvin_file.event_listener.rename.tmp_dir: '%darvin_file.tmp_dir%/renamed'
 
 services:
+    darvin_file.event_listener.copy_cloned_file:
+        class: '%darvin_file.event_listener.copy_cloned_file.class%'
+        tags:
+            - { name: kernel.event_subscriber }
+
     darvin_file.event_listener.rename:
         class: '%darvin_file.event_listener.rename.class%'
         arguments:
