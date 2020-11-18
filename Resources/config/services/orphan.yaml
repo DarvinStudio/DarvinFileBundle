@@ -1,0 +1,16 @@
+parameters:
+    darvin_file.orphan.list.command.class: Darvin\FileBundle\Command\Orphan\ListCommand
+    darvin_file.orphan.list.command.chunk: 50
+
+services:
+    darvin_file.orphan.list.command:
+        class: '%darvin_file.orphan.list.command.class%'
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@filesystem'
+            - '@vich_uploader.metadata_reader'
+            - '@vich_uploader.storage'
+            - '%darvin_file.orphan.list.command.chunk%'
+            - '%vich_uploader.mappings%'
+        tags:
+            - { name: console.command }

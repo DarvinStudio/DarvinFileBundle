@@ -32,6 +32,7 @@ class DarvinFileExtension extends Extension implements PrependExtensionInterface
         (new ConfigLoader($container, __DIR__.'/../Resources/config/services'))->load([
             'archive/core',
             'namer',
+            'orphan',
 
             'archive/archiver/zip' => ['extension' => 'zip'],
             'archive/common'       => ['extension' => 'zip'],
