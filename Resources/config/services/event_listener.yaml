@@ -1,0 +1,13 @@
+parameters:
+    darvin_file.event_listener.rename.class:   Darvin\FileBundle\EventListener\RenameSubscriber
+    darvin_file.event_listener.rename.tmp_dir: '%darvin_file.tmp_dir%/renamed'
+
+services:
+    darvin_file.event_listener.rename:
+        class: '%darvin_file.event_listener.rename.class%'
+        arguments:
+            - '@filesystem'
+            - '@vich_uploader.storage'
+            - '%darvin_file.event_listener.rename.tmp_dir%'
+        tags:
+            - { name: doctrine.event_subscriber }

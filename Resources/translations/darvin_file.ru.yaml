@@ -4,7 +4,7 @@ archive:
             submit:  Архивировать файлы
             success: Файлы архивированы
 
-image:
+file:
     edit:
         success: Файл сохранен
     entity:
