@@ -5,6 +5,8 @@ parameters:
 
     darvin_file.controller.disable.class: Darvin\FileBundle\Controller\File\DisableController
 
+    darvin_file.controller.edit.class: Darvin\FileBundle\Controller\File\EditController
+
     darvin_file.controller.enable.class: Darvin\FileBundle\Controller\File\EnableController
 
     darvin_file.controller.exterminate.class: Darvin\FileBundle\Controller\File\ExterminateController
@@ -27,6 +29,20 @@ services:
     darvin_file.controller.disable:
         class:  '%darvin_file.controller.disable.class%'
         parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
+
+    darvin_file.controller.edit:
+        class:  '%darvin_file.controller.edit.class%'
+        parent: darvin_file.controller.abstract
+        arguments:
+            - '@darvin_utils.flash.notifier'
+            - '@form.factory'
+            - '@router'
+            - '@translator'
+            - '@twig'
+            - '%darvin_file.action.edit.template.full%'
+            - '%darvin_file.action.edit.template.partial%'
         tags:
             - { name: controller.service_arguments }
 

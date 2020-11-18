@@ -1,0 +1,13 @@
+parameters:
+    darvin_file.form.type.edit.class: Darvin\FileBundle\Form\Type\FileEditType
+
+services:
+    darvin_file.form.type.edit:
+        class: '%darvin_file.form.type.edit.class%'
+        arguments:
+            - '@darvin_utils.object_namer'
+            - '@translator'
+            - '%darvin_file.action.edit.fields%'
+            - '%darvin_file.action.edit.translation_domain%'
+        tags:
+            - { name: form.type }
