@@ -1,0 +1,10 @@
+parameters:
+    darvin_file.archive.twig.extension.class: Darvin\FileBundle\Twig\Extension\ArchiveExtension
+
+services:
+    darvin_file.archive.twig.extension:
+        class: '%darvin_file.archive.twig.extension.class%'
+        arguments:
+            - '@?darvin_file.archive.form.factory'
+        tags:
+            - { name: twig.extension }

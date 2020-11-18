@@ -3,7 +3,7 @@ parameters:
 
     darvin_file.archive.controller.download.class: Darvin\FileBundle\Controller\Archive\DownloadController
 
-    darvin_file.archive.form_factory.class: Darvin\FileBundle\Form\Factory\ArchiveFormFactory
+    darvin_file.archive.form.factory.class: Darvin\FileBundle\Form\Factory\ArchiveFormFactory
 
 services:
     darvin_file.archive.controller.build:
@@ -11,7 +11,7 @@ services:
         arguments:
             - '@darvin_file.archiver'
             - '@darvin_utils.flash.notifier'
-            - '@darvin_file.archive.form_factory'
+            - '@darvin_file.archive.form.factory'
             - '@router'
             - '@translator'
         tags:
@@ -24,8 +24,8 @@ services:
         tags:
             - { name: controller.service_arguments }
 
-    darvin_file.archive.form_factory:
-        class: '%darvin_file.archive.form_factory.class%'
+    darvin_file.archive.form.factory:
+        class: '%darvin_file.archive.form.factory.class%'
         arguments:
             - '@form.factory'
             - '@router'
