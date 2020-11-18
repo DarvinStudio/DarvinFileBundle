@@ -4,6 +4,8 @@ parameters:
     darvin_file.event_listener.rename.class:   Darvin\FileBundle\EventListener\RenameSubscriber
     darvin_file.event_listener.rename.tmp_dir: '%darvin_file.tmp_dir%/renamed'
 
+    darvin_file.event_listener.update_properties.class: Darvin\FileBundle\EventListener\UpdateFilePropertiesSubscriber
+
 services:
     darvin_file.event_listener.copy_cloned_file:
         class: '%darvin_file.event_listener.copy_cloned_file.class%'
@@ -18,3 +20,8 @@ services:
             - '%darvin_file.event_listener.rename.tmp_dir%'
         tags:
             - { name: doctrine.event_subscriber }
+
+    darvin_file.event_listener.update_properties:
+        class: '%darvin_file.event_listener.update_properties.class%'
+        tags:
+            - { name: kernel.event_subscriber }
