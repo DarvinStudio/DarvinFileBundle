@@ -1,0 +1,10 @@
+darvin_file_archive_build:
+    path:     /build
+    defaults: { _controller: darvin_file.archive.controller.build }
+    methods:  [ post ]
+
+darvin_file_archive_download:
+    path:         /download/{filename}
+    defaults:     { _controller: darvin_file.archive.controller.download }
+    requirements: { filename: '\w+%darvin_file.archive.filename_suffix%_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}.zip' }
+    methods:      [ get ]

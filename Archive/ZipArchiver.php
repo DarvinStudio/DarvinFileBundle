@@ -102,18 +102,18 @@ class ZipArchiver implements ArchiverInterface
         $zip = new \ZipArchive();
 
         if (true !== $zip->open($pathname, \ZipArchive::CREATE)) {
-            throw new \RuntimeException(sprintf('Unable to create image archive "%s".', $pathname));
+            throw new \RuntimeException(sprintf('Unable to create archive "%s".', $pathname));
         }
         try {
             $finder = (new Finder())->in($this->uploadDir);
         } catch (\InvalidArgumentException $ex) {
-            throw new \RuntimeException(sprintf('Image upload directory "%s" does not exist.', $this->uploadDir));
+            throw new \RuntimeException(sprintf('Upload directory "%s" does not exist.', $this->uploadDir));
         }
         /** @var \Symfony\Component\Finder\SplFileInfo $dir */
         foreach ($finder->directories() as $dir) {
             if (!$zip->addEmptyDir($dir->getRelativePathname())) {
                 throw new \RuntimeException(
-                    sprintf('Unable to create directory "%s" in image archive "%s".', $dir->getRelativePathname(), $pathname)
+                    sprintf('Unable to create directory "%s" in archive "%s".', $dir->getRelativePathname(), $pathname)
                 );
             }
         }
@@ -121,12 +121,12 @@ class ZipArchiver implements ArchiverInterface
         foreach ($finder->files() as $file) {
             if (!$zip->addFile($file->getPathname(), $file->getRelativePathname())) {
                 throw new \RuntimeException(
-                    sprintf('Unable to add file "%s" to image archive "%s".', $file->getPathname(), $pathname)
+                    sprintf('Unable to add file "%s" to archive "%s".', $file->getPathname(), $pathname)
                 );
             }
         }
         if (!$zip->close()) {
-            throw new \RuntimeException(sprintf('Unable to close image archive "%s".', $pathname));
+            throw new \RuntimeException(sprintf('Unable to close archive "%s".', $pathname));
         }
     }
 
@@ -140,7 +140,7 @@ class ZipArchiver implements ArchiverInterface
                 $this->filesystem->mkdir($this->tmpDir);
             } catch (IOException $ex) {
                 throw new \RuntimeException(
-                    sprintf('Unable to create image archive temporary file directory "%s": "%s".', $this->tmpDir, $ex->getMessage())
+                    sprintf('Unable to create archive temporary file directory "%s": "%s".', $this->tmpDir, $ex->getMessage())
                 );
             }
         }

@@ -10,6 +10,7 @@
 
 namespace Darvin\FileBundle\DependencyInjection;
 
+use Darvin\Utils\DependencyInjection\ConfigInjector;
 use Darvin\Utils\DependencyInjection\ConfigLoader;
 use Darvin\Utils\DependencyInjection\ExtensionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,7 +27,18 @@ class DarvinFileExtension extends Extension implements PrependExtensionInterface
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        (new ConfigLoader($container, __DIR__.'/../Resources/config/services'))->load('namer');
+        (new ConfigInjector($container))->inject($this->processConfiguration(new Configuration(), $configs), $this->getAlias());
+
+        (new ConfigLoader($container, __DIR__.'/../Resources/config/services'))->load([
+            'namer',
+
+            'archive/archiver/zip' => ['extension' => 'zip'],
+            'archive/common'       => ['extension' => 'zip'],
+        ]);
+
+        if (extension_loaded('zip')) {
+            $container->setAlias('darvin_file.archiver', 'darvin_file.archiver.zip');
+        }
     }
 
     /**

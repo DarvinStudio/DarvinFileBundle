@@ -1,0 +1,13 @@
+parameters:
+    darvin_file.archiver.zip.class:   Darvin\FileBundle\Archive\ZipArchiver
+    darvin_file.archiver.zip.tmp_dir: '%darvin_file.tmp_dir%/archives'
+
+services:
+    darvin_file.archiver.zip:
+        class: '%darvin_file.archiver.zip.class%'
+        arguments:
+            - '@filesystem'
+            - '@request_stack'
+            - '%darvin_file.archive.filename_suffix%'
+            - '%darvin_file.archiver.zip.tmp_dir%'
+            - '%kernel.project_dir%/public/%darvin_file.upload_path%'
