@@ -4,3 +4,12 @@ archive:
             submit:  Архивировать файлы
             success: Файлы архивированы
 
+image:
+    edit:
+        success: Файл сохранен
+    entity:
+        name: Название
+    help:
+        name: Имя файла (без расширения)
+
+

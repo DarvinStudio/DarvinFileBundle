@@ -67,9 +67,17 @@ class FileEditType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $class = null !== $builder->getData() ? ClassUtils::getClass($builder->getData()) : AbstractFile::class;
+        $class  = null !== $builder->getData() ? ClassUtils::getClass($builder->getData()) : AbstractFile::class;
+        $fields = $this->fields[AbstractFile::class];
 
-        foreach ($this->fields[$class] ?? $this->fields[AbstractFile::class] as $name => $attr) {
+        foreach (array_merge([$class], class_parents($class)) as $c) {
+            if (isset($this->fields[$c])) {
+                $fields = $this->fields[$c];
+
+                break;
+            }
+        }
+        foreach ($fields as $name => $attr) {
             if ($attr['enabled']) {
                 $builder->add($name, $attr['type'], $attr['options']);
             }
@@ -110,7 +118,6 @@ class FileEditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class'         => AbstractFile::class,
             'csrf_protection'    => false,
             'translation_domain' => $this->translationDomain,
         ]);

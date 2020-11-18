@@ -50,6 +50,9 @@ class DarvinFileExtension extends Extension implements PrependExtensionInterface
      */
     public function prepend(ContainerBuilder $container): void
     {
-        (new ExtensionConfigurator($container, __DIR__.'/../Resources/config/app'))->configure('vich_uploader');
+        (new ExtensionConfigurator($container, __DIR__.'/../Resources/config/app'))->configure([
+            'darvin_file',
+            'vich_uploader',
+        ]);
     }
 }

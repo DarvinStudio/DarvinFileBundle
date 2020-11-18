@@ -1,0 +1,9 @@
+darvin_file:
+    action:
+        edit:
+            fields:
+                Darvin\FileBundle\Entity\AbstractFile:
+                    name:
+                        options:
+                            help:               file.help.name
+                            translation_domain: darvin_file

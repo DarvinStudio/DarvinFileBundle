@@ -4,3 +4,11 @@ archive:
             submit:  Archive Files
             success: Files archived
 
+file:
+    edit:
+        success: File updated
+    entity:
+        name: Name
+    help:
+        name: File name (without extension)
+
