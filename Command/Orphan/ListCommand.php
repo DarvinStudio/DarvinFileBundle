@@ -89,8 +89,8 @@ class ListCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Shows list of orphan files.')
-            ->setName('darvin:file:orphans');
+            ->setName('darvin:file:orphans')
+            ->setDescription('Shows list of orphan files.');
     }
 
     /**

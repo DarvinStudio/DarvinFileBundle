@@ -1,0 +1,49 @@
+parameters:
+    darvin_file.controller.abstract.class: Darvin\FileBundle\Controller\File\AbstractFileController
+
+    darvin_file.controller.delete.class: Darvin\FileBundle\Controller\File\DeleteController
+
+    darvin_file.controller.disable.class: Darvin\FileBundle\Controller\File\DisableController
+
+    darvin_file.controller.enable.class: Darvin\FileBundle\Controller\File\EnableController
+
+    darvin_file.controller.exterminate.class: Darvin\FileBundle\Controller\File\ExterminateController
+
+    darvin_file.controller.sort.class: Darvin\FileBundle\Controller\File\SortController
+
+services:
+    darvin_file.controller.abstract:
+        class:    '%darvin_file.controller.abstract.class%'
+        abstract: true
+        calls:
+            - [ setEntityManager, [ '@doctrine.orm.entity_manager' ] ]
+
+    darvin_file.controller.delete:
+        class:  '%darvin_file.controller.delete.class%'
+        parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
+
+    darvin_file.controller.disable:
+        class:  '%darvin_file.controller.disable.class%'
+        parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
+
+    darvin_file.controller.enable:
+        class:  '%darvin_file.controller.enable.class%'
+        parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
+
+    darvin_file.controller.exterminate:
+        class:  '%darvin_file.controller.exterminate.class%'
+        parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
+
+    darvin_file.controller.sort:
+        class:  '%darvin_file.controller.sort.class%'
+        parent: darvin_file.controller.abstract
+        tags:
+            - { name: controller.service_arguments }
