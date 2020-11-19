@@ -10,6 +10,7 @@
 
 namespace Darvin\FileBundle\Entity;
 
+use Darvin\FileBundle\Validation\Constraints as DarvinFileAssert;
 use Darvin\Utils\Mapping\Annotation\Clonable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -89,6 +90,8 @@ abstract class AbstractFile
 
     /**
      * @var \Symfony\Component\HttpFoundation\File\File|null
+     *
+     * @DarvinFileAssert\DarvinFile
      *
      * @Vich\UploadableField(mapping="darvin_file", fileNameProperty="filename")
      */

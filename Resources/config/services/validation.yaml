@@ -1,0 +1,10 @@
+parameters:
+    darvin_file.validation.validator.darvin_file.class: Darvin\FileBundle\Validation\Constraints\DarvinFileValidator
+
+services:
+    darvin_file.validation.validator.darvin_file:
+        class: '%darvin_file.validation.validator.darvin_file.class%'
+        arguments:
+            - '%darvin_file.constraints%'
+        tags:
+            - { name: validator.constraint_validator }

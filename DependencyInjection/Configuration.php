@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
         $builder = new TreeBuilder('darvin_file');
         $builder->getRootNode()
             ->children()
+                ->arrayNode('constraints')->useAttributeAsKey('name')->prototype('variable')->end()->end()
                 ->scalarNode('tmp_dir')->defaultValue('%kernel.project_dir%/var/tmp/darvin/file')->cannotBeEmpty()->end()
                 ->scalarNode('upload_path')->isRequired()->cannotBeEmpty()->end()
                 ->arrayNode('action')
