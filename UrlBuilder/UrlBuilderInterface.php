@@ -20,10 +20,11 @@ interface UrlBuilderInterface
     /**
      * @param \Darvin\FileBundle\Entity\AbstractFile|null $file        File
      * @param bool                                        $prependHost Whether to prepend host
+     * @param string|null                                 $fallback    Fallback
      *
      * @return string|null
      */
-    public function buildOriginalUrl(?AbstractFile $file, bool $prependHost = false): ?string;
+    public function buildOriginalUrl(?AbstractFile $file, bool $prependHost = false, ?string $fallback = null): ?string;
 
     /**
      * @param \Darvin\FileBundle\Entity\AbstractFile|null $file File

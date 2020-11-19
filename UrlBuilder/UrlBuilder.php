@@ -43,13 +43,13 @@ class UrlBuilder implements UrlBuilderInterface
     /**
      * {@inheritDoc}
      */
-    public function buildOriginalUrl(?AbstractFile $file, bool $prependHost = false): ?string
+    public function buildOriginalUrl(?AbstractFile $file, bool $prependHost = false, ?string $fallback = null): ?string
     {
-        if (!$this->isActive($file)) {
-            return null;
+        if ($this->isActive($file)) {
+            return $this->urlAbsolutizer->absolutizeUrl($this->storage->resolveUri($file, AbstractFile::PROPERTY_FILE, ClassUtils::getClass($file)), $prependHost);
         }
 
-        return $this->urlAbsolutizer->absolutizeUrl($this->storage->resolveUri($file, AbstractFile::PROPERTY_FILE, ClassUtils::getClass($file)), $prependHost);
+        return $this->urlAbsolutizer->absolutizeUrl($fallback, $prependHost);
     }
 
     /**
