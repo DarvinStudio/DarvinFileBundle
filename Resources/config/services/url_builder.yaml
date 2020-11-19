@@ -1,6 +1,8 @@
 parameters:
     darvin_file.url_builder.builder.class: Darvin\FileBundle\UrlBuilder\UrlBuilder
 
+    darvin_file.url_builder.twig.extension.class: Darvin\FileBundle\Twig\Extension\UrlBuilderExtension
+
     darvin_file.url_builder.url_absolutizer.class: Darvin\FileBundle\UrlBuilder\UrlAbsolutizer
 
 services:
@@ -11,6 +13,11 @@ services:
         arguments:
             - '@vich_uploader.storage'
             - '@darvin_file.url_builder.url_absolutizer'
+
+    darvin_file.url_builder.twig.extension:
+        class: '%darvin_file.url_builder.twig.extension.class%'
+        arguments:
+            - '@darvin_file.url_builder.builder'
 
     darvin_file.url_builder.url_absolutizer:
         class: '%darvin_file.url_builder.url_absolutizer.class%'
