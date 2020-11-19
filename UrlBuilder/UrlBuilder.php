@@ -13,7 +13,6 @@ namespace Darvin\FileBundle\UrlBuilder;
 
 use Darvin\FileBundle\Entity\AbstractFile;
 use Doctrine\Common\Util\ClassUtils;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 /**
@@ -22,23 +21,23 @@ use Vich\UploaderBundle\Storage\StorageInterface;
 class UrlBuilder implements UrlBuilderInterface
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\RequestStack
-     */
-    private $requestStack;
-
-    /**
      * @var \Vich\UploaderBundle\Storage\StorageInterface
      */
     private $storage;
 
     /**
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack Request stack
-     * @param \Vich\UploaderBundle\Storage\StorageInterface  $storage      Storage
+     * @var \Darvin\FileBundle\UrlBuilder\UrlAbsolutizerInterface
      */
-    public function __construct(RequestStack $requestStack, StorageInterface $storage)
+    private $urlAbsolutizer;
+
+    /**
+     * @param \Vich\UploaderBundle\Storage\StorageInterface         $storage        Storage
+     * @param \Darvin\FileBundle\UrlBuilder\UrlAbsolutizerInterface $urlAbsolutizer URL absolutizer
+     */
+    public function __construct(StorageInterface $storage, UrlAbsolutizerInterface $urlAbsolutizer)
     {
-        $this->requestStack = $requestStack;
         $this->storage = $storage;
+        $this->urlAbsolutizer = $urlAbsolutizer;
     }
 
     /**
@@ -50,7 +49,7 @@ class UrlBuilder implements UrlBuilderInterface
             return null;
         }
 
-        return $this->makeUrlAbsolute($this->storage->resolveUri($file, AbstractFile::PROPERTY_FILE, ClassUtils::getClass($file)), $prependHost);
+        return $this->urlAbsolutizer->absolutizeUrl($this->storage->resolveUri($file, AbstractFile::PROPERTY_FILE, ClassUtils::getClass($file)), $prependHost);
     }
 
     /**
@@ -59,30 +58,5 @@ class UrlBuilder implements UrlBuilderInterface
     public function isActive(?AbstractFile $file): bool
     {
         return null !== $file && $file->isEnabled();
-    }
-
-    /**
-     * @param string|null $url         URL
-     * @param bool        $prependHost Whether to prepend host
-     *
-     * @return string|null
-     */
-    private function makeUrlAbsolute(?string $url, bool $prependHost = true): ?string
-    {
-        if (null === $url) {
-            return null;
-        }
-
-        $parts = ['/', ltrim($url, '/')];
-
-        if ($prependHost) {
-            $request = $this->requestStack->getCurrentRequest();
-
-            if (null !== $request) {
-                array_unshift($parts, $request->getSchemeAndHttpHost());
-            }
-        }
-
-        return implode('', $parts);
     }
 }
