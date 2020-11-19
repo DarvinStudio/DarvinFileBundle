@@ -18,6 +18,8 @@ services:
         class: '%darvin_file.url_builder.twig.extension.class%'
         arguments:
             - '@darvin_file.url_builder.builder'
+        tags:
+            - { name: twig.extension }
 
     darvin_file.url_builder.url_absolutizer:
         class: '%darvin_file.url_builder.url_absolutizer.class%'
