@@ -1,0 +1,18 @@
+parameters:
+    darvin_file.url_builder.builder.class: Darvin\FileBundle\UrlBuilder\UrlBuilder
+
+    darvin_file.url_builder.url_absolutizer.class: Darvin\FileBundle\UrlBuilder\UrlAbsolutizer
+
+services:
+    Darvin\FileBundle\UrlBuilder\UrlBuilderInterface: '@darvin_file.url_builder.builder'
+
+    darvin_file.url_builder.builder:
+        class: '%darvin_file.url_builder.builder.class%'
+        arguments:
+            - '@vich_uploader.storage'
+            - '@darvin_file.url_builder.url_absolutizer'
+
+    darvin_file.url_builder.url_absolutizer:
+        class: '%darvin_file.url_builder.url_absolutizer.class%'
+        arguments:
+            - '@request_stack'

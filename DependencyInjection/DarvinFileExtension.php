@@ -36,6 +36,7 @@ class DarvinFileExtension extends Extension implements PrependExtensionInterface
             'form',
             'namer',
             'orphan',
+            'url_builder',
 
             'archive/archiver/zip' => ['extension' => 'zip'],
             'archive/common'       => ['extension' => 'zip'],
