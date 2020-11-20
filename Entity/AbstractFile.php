@@ -11,6 +11,8 @@
 namespace Darvin\FileBundle\Entity;
 
 use Darvin\FileBundle\Validation\Constraints as DarvinFileAssert;
+use Darvin\Utils\File\Size\FileSize;
+use Darvin\Utils\File\Size\FileSizeConverter;
 use Darvin\Utils\Mapping\Annotation\Clonable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -133,6 +135,14 @@ abstract class AbstractFile
     public static function getBaseUploadDir(): string
     {
         return 'files';
+    }
+
+    /**
+     * @return \Darvin\Utils\File\Size\FileSize
+     */
+    public function getConvertedSize(): FileSize
+    {
+        return FileSizeConverter::convertSize($this->size);
     }
 
     /**
