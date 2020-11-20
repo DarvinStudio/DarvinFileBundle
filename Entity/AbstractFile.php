@@ -73,6 +73,13 @@ abstract class AbstractFile
     protected $filename;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $size;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(type="integer")
@@ -103,6 +110,7 @@ abstract class AbstractFile
     public function __construct()
     {
         $this->enabled = true;
+        $this->size = 0;
         $this->updatedAt = new \DateTime();
     }
 
@@ -227,6 +235,26 @@ abstract class AbstractFile
     public function setFilename(?string $filename): AbstractFile
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSize(): int
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param int $size size
+     *
+     * @return AbstractFile
+     */
+    public function setSize(int $size): AbstractFile
+    {
+        $this->size = $size;
 
         return $this;
     }

@@ -46,5 +46,11 @@ class UpdateFilePropertiesSubscriber implements EventSubscriberInterface
         if (null === $file->getName()) {
             $file->setName(preg_replace(sprintf('/\.%s$/', $file->getExtension()), '', $file->getFilename()));
         }
+
+        $uploadedFile = $event->getMapping()->getFile($file);
+
+        if (null !== $uploadedFile) {
+            $file->setSize($uploadedFile->getSize());
+        }
     }
 }
