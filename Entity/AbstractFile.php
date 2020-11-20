@@ -142,7 +142,7 @@ abstract class AbstractFile
      */
     public function getConvertedSize(): FileSize
     {
-        return FileSizeConverter::convertSize($this->size);
+        return FileSizeConverter::convert($this->size);
     }
 
     /**
