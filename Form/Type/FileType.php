@@ -53,21 +53,11 @@ class FileType extends AbstractType
             'editable'    => $options['editable'],
         ]);
 
-        $help = (string)$view->children['file']->vars['help'];
-
-        if ('' === $help) {
-            return;
+        if (!isset($view->vars['help_translation_parameters']['%file_help%'])) {
+            $view->vars['help_translation_parameters']['%file_help%'] = $view->children['file']->vars['help'];
         }
 
         $view->children['file']->vars['help'] = null;
-
-        $view->vars['help'] = (string)$view->vars['help'];
-
-        if ('' !== $view->vars['help']) {
-            $view->vars['help'] .= '<br>';
-        }
-
-        $view->vars['help'] .= $help;
     }
 
     /**
@@ -81,6 +71,7 @@ class FileType extends AbstractType
                 'csrf_protection'    => false,
                 'disableable'        => true,
                 'editable'           => true,
+                'help'               => 'form.file.help',
                 'required'           => false,
                 'upload_max_size_mb' => null,
             ])
